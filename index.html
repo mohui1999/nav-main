@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人导航 - 磨砂玻璃版</title>
+    <style>
+        /* 全局重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            /* 背景图片设置 - 请在此处替换你的图片链接 */
+            /* 为了配合磨砂玻璃，建议选择色彩丰富或纹理明显的背景图 */
+            background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2670&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff; /* 全局文字改色为白 */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* 背景遮罩层 - 加深背景，让磨砂玻璃更明显 */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3); /* 黑色半透明遮罩 */
+            z-index: 0;
+        }
+
+        /* 主容器 */
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 860px; /* 稍微加宽一点 */
+            margin: 0 auto;
+            padding: 60px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 头部头像与标题 */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            /* 给头像也加一点磨砂感边框 */
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 15px;
+            background-image: url('https://s3.bmp.ovh/imgs/2023/03/15/9735f511520e7d10.jpg');
+            background-size: cover;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            color: #fff;
+            font-weight: 300;
+            letter-spacing: 2px;
+            font-size: 26px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* 链接网格布局 */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 25px;
+            width: 100%;
+        }
+
+        /* --- 核心修改：磨砂玻璃卡片样式 --- */
+        .nav-item {
+            display: block;
+            text-decoration: none;
+            color: #fff; /* 文字白色 */
+            text-align: center;
+            padding: 25px 20px;
+            border-radius: 16px; /* 更圆润的边角 */
+            transition: all 0.3s ease;
+            
+            /* 磨砂玻璃核心代码 */
+            background-color: rgba(255, 255, 255, 0.1); /* 极淡的白色半透明背景 */
+            backdrop-filter: blur(12px); /* 背景高斯模糊 */
+            -webkit-backdrop-filter: blur(12px); /* Safari 兼容支持 */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* 半透明白色细边框，增加质感 */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 柔和的阴影提升层次感 */
+        }
+
+        /* 鼠标悬停效果 */
+        .nav-item:hover {
+            transform: translateY(-7px); /* 上浮效果 */
+            background-color: rgba(255, 255, 255, 0.2); /* hover时稍微变亮/不透明一点 */
+            border-color: rgba(255, 255, 255, 0.4); /* 边框也变亮 */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* 阴影加深 */
+        }
+        /* ---------------------------------- */
+
+        .nav-item span {
+            display: block;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+            display: block;
+            /* 给图标加一点微光效果 */
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* 底部备案信息 */
+        .footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 30px 20px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: color 0.2s;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+        }
+
+        .footer a:hover {
+            color: #fff;
+            border-bottom-color: #fff;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 480px) {
+            .nav-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .nav-item {
+                 padding: 20px 15px;
+            }
+            .container {
+                padding-top: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="avatar"></div>
+            <h1>个人导航站</h1>
+        </div>
+
+        <div class="nav-grid">
+            <a href="https://www.google.com" target="_blank" class="nav-item">
+                <span class="icon">🔎</span>
+                <span>Google</span>
+            </a>
+            
+            <a href="https://www.bilibili.com" target="_blank" class="nav-item">
+                <span class="icon">📺</span>
+                <span>Bilibili</span>
+            </a>
+
+            <a href="https://github.com" target="_blank" class="nav-item">
+                <span class="icon">📦</span>
+                <span>GitHub</span>
+            </a>
+
+            <a href="https://www.zhihu.com" target="_blank" class="nav-item">
+                <span class="icon">📚</span>
+                <span>知乎</span>
+            </a>
+
+            <a href="https://music.163.com/" target="_blank" class="nav-item">
+                <span class="icon">🎵</span>
+                <span>网易云音乐</span>
+            </a>
+
+            <a href="#" target="_blank" class="nav-item">
+                <span class="icon">☁️</span>
+                <span>阿里云</span>
+            </a>
+             <a href="#" target="_blank" class="nav-item">
+                <span class="icon">🎮</span>
+                <span>Steam</span>
+            </a>
+             <a href="#" target="_blank" class="nav-item">
+                <span class="icon">📧</span>
+                <span>我的邮箱</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Copyright © 2025 Mohui. All Rights Reserved.</p>
+        <p>
+            <a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备19009044号-3</a>
+            </p>
+    </div>
+
+</body>
+</html>
+
+  
